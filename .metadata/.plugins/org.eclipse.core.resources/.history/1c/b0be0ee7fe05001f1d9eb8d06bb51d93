@@ -1,0 +1,19 @@
+package model;
+
+import java.sql.*;
+
+public class UserDAO {
+	Connection con = Database.CON;
+	
+	public UserVO read(String uid) {
+		UserVO vo = new UserVO();
+		String sql = "SELECT * FROM users WHERE uid = ?";
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("read 오류 : " + toString());
+		}
+		return vo;
+	}
+}

@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div>
+	<h1>도서검색</h1>
+	<div id="div_book" class="row"></div>
+	<script id="temp_book" type="x-handlebars-template">
+		{{#each documents}}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="card mx-1 my-3">
+					<div class="card-body">
+						<img src="{{thumbnail}}" width="90%">
+					</div>
+					<div class="card-footer">
+						<div class="ellipsis">{{title}}</div>
+					</div>
+				</div>
+			</div>
+		{{/each}}
+	</script>
+</div>
+<script>
+	getData();
+	function getData(){
+		$.ajax({
+			type:"get",
+			url:"https://dapi.kakao.com/v3/search/book?target=title",
+			headers:{"Authorization":"KakaoAK 35c0aa5e699cabcb9592ef08fb07d91a"},
+			dataType:"json",
+			data:{"query":"JSP", page:1, size:6},
+			success:function(data){
+				console.log(data);
+				const temp = Handlebars.compile($('#temp_book').html());
+				$('#div_book').html(temp(data));
+			}
+		});
+	}
+</script>
