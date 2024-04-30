@@ -62,6 +62,24 @@
 			$(frm.upass).focus();
 		}else{
 			// 로그인 체크
+			$.ajax({
+				type:"post",
+				url:"/user/login",
+				data:{uid, upass},
+				success:function(data){
+					if(data == 0){
+						alert("아이디가 존재하지 않습니다.");
+						$(frm.uid).val("");
+						$(frm.uid).focus();
+					}else if(data == 2){
+						alert("비밀번호가 일치하지 않습니다.");
+						$(frm.upass).val("");
+						$(frm.upass).focus();
+					}else {
+						location.href='/';
+					}
+				}
+			});
 		}
 	});
 </script>

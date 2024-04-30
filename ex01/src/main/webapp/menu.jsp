@@ -40,3 +40,30 @@
 		</div>
 	</div>
 </nav>
+
+<script>
+	const uid = '${uid}';
+	if(uid){
+        $('#login').hide();
+        $('#logout').show();
+        $('#uid').show();
+        $('#uid a').html(uid + " 님");
+    }else {
+        $('#login').show();
+        $('#logout').hide();
+        $('#uid').hide();
+    }
+	// 로그아웃 버튼 클릭한 경우
+    $('#logout').on("click", "a", function(e){
+        e.preventDefault();
+        if(confirm("로그아웃 하시겠습니까?")){
+            location.href="/user/logout";
+        }
+    });
+
+    // 유저아이디 클릭한 경우
+    $('#uid').on("click", "a", function(e){
+        e.preventDefault();
+        location.href="/users/mypage?uid=" + uid;
+    })
+</script>
