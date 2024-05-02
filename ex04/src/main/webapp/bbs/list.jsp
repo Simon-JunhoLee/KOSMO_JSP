@@ -3,22 +3,25 @@
 <div>
 	<h1>게시판</h1>
 	<div class="row mb-4">
-	    <form class="col-4" name="frm" action="">
-	        <div class="input-group">
-	            <input class="form-control" name="query" type="text" value="" placeholder="게시글 검색">
-	            <button class="btn btn-dark">검색</button>
-	        </div>
-	        <!-- 
-	        <select class="form-control" name="size">
-	            	<option value="5">5</option>
-	            	<option value="10">10</option>
-	            	<option value="20">20</option>
-            </select>
-             -->
-	    </form>
+		<div class="col-4">
+		    <form name="frm" action="">
+		        <div class="input-group">
+		            <input class="form-control" name="query" type="text" value="" placeholder="게시글 검색">
+		            <button class="btn btn-dark">검색</button>
+		        </div>
+		    </form>
+		 </div>
 	    <div class="col pt-2">
 	        <span id="total"></span>
 	    </div>
+		<div class="col-3 text-end mt-2">출력 게시글 개수 :</div> 
+		<div class="col-1">
+	        <select class="form-control" id="size">
+	            <option value="5">5</option>
+	            <option value="10" selected>10</option>
+	            <option value="20">20</option>
+	        </select>
+		</div>
 	    <div class="col text-end" id="div-write" style="display: none;">
 	        <a href="/bbs/insert"><button class="btn btn-dark">글쓰기</button></a>
 	    </div>
@@ -58,8 +61,13 @@
 <script>
 	let query = $(frm.query).val();
 	let page = 1;
-	const size = 5;
+	let size = $('#size').val();
 	getData();
+	
+	$('#size').on("change", function(){
+		size = $('#size').val();
+		getData();
+	});
 	
 	if(uid){
         $('#div-write').show();

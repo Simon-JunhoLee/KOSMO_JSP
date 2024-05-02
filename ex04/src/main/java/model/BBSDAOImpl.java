@@ -11,13 +11,15 @@ public class BBSDAOImpl implements BBSDAO{
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss"); 
 	
 	@Override
-	public ArrayList<BBSVO> list(String title) {
+	public ArrayList<BBSVO> list(String title, int page, int size) {
 		// TODO Auto-generated method stub
 		ArrayList<BBSVO> array = new ArrayList<BBSVO>();
 		try {
-			String sql = "SELECT * FROM view_bbs WHERE title LIKE CONCAT('%', ?, '%') ORDER BY bid DESC";
+			String sql = "SELECT * FROM view_bbs WHERE title LIKE CONCAT('%', ?, '%') ORDER BY bid DESC limit ?, ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, title);
+			pstmt.setInt(2, (page-1)*size);
+			pstmt.setInt(3, size);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BBSVO vo = new BBSVO();
@@ -83,13 +85,32 @@ public class BBSDAOImpl implements BBSDAO{
 	@Override
 	public void update(BBSVO vo) {
 		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE bbs SET title=?, contents=?, bdate=now() WHERE bid=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setInt(3, vo.getBid());
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("게시글 수정 : " + e.toString());
+		}
 		
 	}
 
 	@Override
 	public void delete(int bid) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "DELETE FROM bbs WHERE bid=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("게시글 삭제 : " + e.toString());
+		}
 	}
 
 	@Override

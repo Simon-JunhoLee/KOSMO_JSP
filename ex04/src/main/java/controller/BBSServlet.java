@@ -41,13 +41,15 @@ public class BBSServlet extends HttpServlet {
 			
 		case "/bbs/list.json":
 			query = request.getParameter("query");
+			int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+			int size = request.getParameter("size") != null ? Integer.parseInt(request.getParameter("size")) : 10;
 			Gson gson = new Gson();
-			out.print(gson.toJson(dao.list(query)));
+			out.print(gson.toJson(dao.list(query, page, size)));
 			break;
 			
 		case "/bbs/read":
 			String bid = request.getParameter("bid");
-			System.out.println("전달 받은 bid : "+bid);
+			// System.out.println("전달 받은 bid : "+bid);
 			BBSVO vo = dao.read(Integer.parseInt(bid));
 			request.setAttribute("bbs", vo);
 			request.setAttribute("pageName", "/bbs/read.jsp");
@@ -56,6 +58,14 @@ public class BBSServlet extends HttpServlet {
 			
 		case "/bbs/insert":
 			request.setAttribute("pageName", "/bbs/insert.jsp");
+			dis.forward(request, response);
+			break;
+			
+		case "/bbs/update":
+			bid = request.getParameter("bid");
+			BBSVO bbs = dao.read(Integer.parseInt(bid));
+			request.setAttribute("bbs", bbs);
+			request.setAttribute("pageName", "/bbs/update.jsp");
 			dis.forward(request, response);
 			break;
 		}
@@ -72,6 +82,23 @@ public class BBSServlet extends HttpServlet {
 			System.out.println(vo.toString());
 			dao.insert(vo);
 			response.sendRedirect("/bbs/list");
+			break;
+			
+		case "/bbs/update":
+			vo = new BBSVO();
+			String bid = request.getParameter("bid");
+			vo.setBid(Integer.parseInt(bid));
+			vo.setTitle(request.getParameter("title"));
+			vo.setContents(request.getParameter("contents"));
+			dao.update(vo);
+			// System.out.println(vo.toString());
+			response.sendRedirect("/bbs/read?bid="+bid);
+			break;
+			
+		case "/bbs/delete":
+			bid = request.getParameter("bid");
+			// System.out.println("삭제 bid : " + bid);
+			dao.delete(Integer.parseInt(bid));
 			break;
 		}
 	}
