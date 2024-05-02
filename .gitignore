@@ -1,1 +1,8 @@
-/.metadata/
+.metadata/
+/Servers
+**/.classpath
+**/.project
+**/.settings/
+**/build/
+**/src/main/webapp/WEB-INF/
+**/src/main/webapp/META-INF/
