@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import model.UserDAO;
 import model.UserVO;
 
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet(value={"/user/login", "/user/logout", "/user/mypage", "/user/update", "/user/update/pass"})
+@WebServlet(value={"/user/login", "/user/logout", "/user/mypage", "/user/update", "/user/update/pass", "/user/list", "/user/upload", "/user/join"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserDAO dao = new UserDAO();
@@ -25,6 +29,7 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
 		HttpSession session = request.getSession();
+		PrintWriter out=response.getWriter();
 		
 		switch(request.getServletPath()) {
 		case "/user/login":
@@ -41,6 +46,21 @@ public class UserServlet extends HttpServlet {
 			String uid = (String)session.getAttribute("uid");
 			request.setAttribute("user", dao.read(uid));
 			request.setAttribute("pageName", "/user/mypage.jsp");
+			dis.forward(request, response);
+			break;
+		
+		case "/user/list.json":
+			Gson gson=new Gson();
+			out.print(gson.toJson(dao.list()));
+			break;
+			
+		case "/user/list":
+			request.setAttribute("pageName", "/user/list.jsp");
+			dis.forward(request, response);
+			break;
+			
+		case "/user/join":
+			request.setAttribute("pageName", "/user/join.jsp");
 			dis.forward(request, response);
 			break;
 		}
@@ -83,6 +103,20 @@ public class UserServlet extends HttpServlet {
 			uid = request.getParameter("uid");
 			String npass = request.getParameter("npass");
 			dao.update(uid, npass);
+			break;
+			
+		case "/user/upload":
+			String path="/upload/photo/";
+			MultipartRequest multi=new MultipartRequest(
+					request,
+					"c:" + path,
+					1024*1024*10,
+					new DefaultFileRenamePolicy());
+			String fileName=multi.getFilesystemName("photo");
+			String uid2=multi.getParameter("uid");
+			System.out.println("fileName:" + fileName + "\nuid:" + uid2);
+			String photo=path + fileName;
+			dao.updatePhoto(uid2, photo); //사진이름수정
 			break;
 		}		
 	}
