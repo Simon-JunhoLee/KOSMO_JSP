@@ -30,8 +30,8 @@ public class BBSServlet extends HttpServlet {
 		
 		switch(request.getServletPath()) {
 		case "/bbs/total":
-			String query = request.getParameter("query");
-			out.print(dao.page(query));
+			String query = request.getParameter("query") != null ? request.getParameter("query"):"";
+			out.print(dao.total(query));
 			break;
 			
 		case "/bbs/list":
@@ -40,7 +40,7 @@ public class BBSServlet extends HttpServlet {
 			break;
 			
 		case "/bbs/list.json":
-			query = request.getParameter("query");
+			query = request.getParameter("query") != null ? request.getParameter("query"):"";
 			int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 			int size = request.getParameter("size") != null ? Integer.parseInt(request.getParameter("size")) : 10;
 			Gson gson = new Gson();

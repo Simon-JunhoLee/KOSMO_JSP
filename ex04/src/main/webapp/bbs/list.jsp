@@ -1,5 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+.page-link {
+  color: #000; 
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius : 15%; 
+}
+
+.page-item.active .page-link {
+ z-index: 1;
+ color: #4A6BD6;
+ font-weight:bold;
+ background-color: #f1f1f1;
+ border-color: #ccc;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: #000;
+  background-color: #fafafa; 
+  border-color: #ccc;
+}
+</style>
 <div>
 	<h1>게시판</h1>
 	<div class="row mb-4">
@@ -27,6 +50,7 @@
 	    </div>
 	</div>
 	<div id="div_bbs"></div>
+	<div id="pagination" class="pagination justify-content-center mt-5"></div>
 </div>
 
 <script id="temp_bbs" type="x-handlebars-template">
@@ -53,20 +77,18 @@
 		{{/each}}
 	</table>
 </script>
-<div class="text-center my-3">
-    <button class="btn btn-dark" id="prev">이전</button>
-    <span class="mx-3" id="page"></span>
-    <button class="btn btn-dark" id="next">다음</button>
-</div>
+
 <script>
 	let query = $(frm.query).val();
 	let page = 1;
 	let size = $('#size').val();
 	getData();
+	getTotal();	
 	
 	$('#size').on("change", function(){
 		size = $('#size').val();
 		getData();
+		getTotal();
 	});
 	
 	if(uid){
@@ -75,19 +97,10 @@
         $('#div-write').hide();
     }
 	
-    $("#next").on("click", function(){
-        page++;
-        getData();
-    });
-
-    $("#prev").on("click", function(){
-        page--;
-        getData();
-    });
-    
 	$(frm).on("submit", function(e){
         e.preventDefault();
         query = $(frm.query).val();
+        getTotal();
         getData();
         page=1;
 	});
@@ -102,30 +115,43 @@
 				const temp = Handlebars.compile($("#temp_bbs").html());
 				$("#div_bbs").html(temp(data));
 				// console.log(data);
-                getTotal();
 			}
 		});
 	}
+   	
 	function getTotal(){
 		$.ajax({
 			type:"get",
 			url:"/bbs/total",
 			data: {query:query},
 			success: function(data){
-				 const last = Math.ceil(data/size);
-				 $("#total").html("총 " + data + "건");
-	             $('#page').html(page + "/" + last);
-	             if(page == 1){
-	                 $('#prev').attr('hidden', true);
-	             }else {
-	                 $('#prev').attr('hidden', false);
-	             }
-	             if(page == last){
-	                 $('#next').attr('hidden', true);
-	             }else {
-	                 $('#next').attr('hidden', false);
-	             }
+				if(data == 0){
+					alert("해당 검색 내용이 없습니다.");
+					$(frm.query).val("");
+				}else if(data <= size){
+					$("#pagination").hide();
+				}else {					
+					 const totalPage = Math.ceil(data/size);
+					 $("#total").html("총 " + data + "건");
+					 $("#pagination").twbsPagination("changeTotalPages", totalPage, page);
+					 $("#pagination").show();
+				}
 			}
 		});
 	}
+	$('#pagination').twbsPagination({
+	      totalPages:1, 
+	      visiblePages: 5, 
+	      startPage : 1,
+	      initiateStartPageClick: false, 
+	      first:'<i class="bi bi-chevron-double-left"></i>', 
+	      prev :'<i class="bi bi-chevron-left"></i>',
+	      next :'<i class="bi bi-chevron-right"></i>',
+	      last :'<i class="bi bi-chevron-double-right"></i>',
+	      onPageClick: function (event, clickPage) {
+	          page=clickPage; 
+	          getData();
+	      }
+   });
+	
 </script>

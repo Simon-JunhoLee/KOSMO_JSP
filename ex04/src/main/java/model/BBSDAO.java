@@ -8,5 +8,5 @@ public interface BBSDAO {
 	public BBSVO read(int bid);
 	public void update(BBSVO vo);
 	public void delete(int bid);
-	public int page(String title);
+	public int total(String query);
 }

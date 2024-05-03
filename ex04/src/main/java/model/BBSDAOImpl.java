@@ -11,15 +11,19 @@ public class BBSDAOImpl implements BBSDAO{
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss"); 
 	
 	@Override
-	public ArrayList<BBSVO> list(String title, int page, int size) {
+	public ArrayList<BBSVO> list(String query, int page, int size) {
 		// TODO Auto-generated method stub
 		ArrayList<BBSVO> array = new ArrayList<BBSVO>();
+		query = "%" + query + "%";
 		try {
-			String sql = "SELECT * FROM view_bbs WHERE title LIKE CONCAT('%', ?, '%') ORDER BY bid DESC limit ?, ?";
+			String sql = "SELECT * FROM view_bbs WHERE title LIKE ? OR contents LIKE ? OR writer LIKE ? OR uname LIKE ? ORDER BY bid DESC limit ?, ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, title);
-			pstmt.setInt(2, (page-1)*size);
-			pstmt.setInt(3, size);
+			pstmt.setString(1, query);
+			pstmt.setString(2, query);
+			pstmt.setString(3, query);
+			pstmt.setString(4, query);
+			pstmt.setInt(5, (page-1)*size);
+			pstmt.setInt(6, size);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BBSVO vo = new BBSVO();
@@ -114,13 +118,17 @@ public class BBSDAOImpl implements BBSDAO{
 	}
 
 	@Override
-	public int page(String title) {
+	public int total(String query) {
 		// TODO Auto-generated method stub
 		int totalData = 0;
+		query = "%" + query + "%";
 		try {
-			String sql = "SELECT COUNT(*) total FROM view_bbs WHERE title LIKE CONCAT('%', ?, '%')";
+			String sql = "SELECT COUNT(*) total FROM view_bbs WHERE title LIKE ? OR contents LIKE ? OR writer LIKE ? OR uname LIKE ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, title);
+			pstmt.setString(1, query);
+			pstmt.setString(2, query);
+			pstmt.setString(3, query);
+			pstmt.setString(4, query);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				totalData = rs.getInt("total");
