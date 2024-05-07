@@ -78,7 +78,13 @@
 						$(frm.upass).val("");
 						$(frm.upass).focus();
 					}else {
-						location.href='/';
+						//alert("성공")
+						let target=sessionStorage.getItem("target");
+						if(target){
+							location.href=target;
+						}else{
+							location.href="/";
+						}
 					}
 				}
 			});
