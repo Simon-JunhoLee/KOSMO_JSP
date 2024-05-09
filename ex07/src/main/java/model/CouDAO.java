@@ -8,4 +8,9 @@ public interface CouDAO {
 	// 검색수
 	public int total(QueryVO vo);
 	
+	// 새로운 강좌코드
+	public String getCode();
+	
+	// 강좌등록
+	public void insert(CouVO vo);
 }

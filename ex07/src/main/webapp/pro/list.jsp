@@ -1,27 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-.page-link {
-  color: #000; 
-  background-color: #fff;
-  border: 1px solid #fff;
-  border-radius : 15%; 
-}
-
-.page-item.active .page-link {
- z-index: 1;
- color: #4A6BD6;
- font-weight:bold;
- background-color: #f1f1f1;
- border-color: #ccc;
- 
-}
-
-.page-link:focus, .page-link:hover {
-  color: #000;
-  background-color: #fafafa; 
-  border-color: #ccc;
-}
+	.page-link {
+	  color: #000; 
+	  background-color: #fff;
+	  border: 1px solid #fff;
+	  border-radius : 15%; 
+	}
+	
+	.page-item.active .page-link {
+	 z-index: 1;
+	 color: #4A6BD6;
+	 font-weight:bold;
+	 background-color: #f1f1f1;
+	 border-color: #ccc;
+	 
+	}
+	
+	.page-link:focus, .page-link:hover {
+	  color: #000;
+	  background-color: #fafafa; 
+	  border-color: #ccc;
+	}
 </style>
 <div>
 	<h1>교수관리</h1>
@@ -133,14 +133,16 @@
 			url:"/pro/total",
 			data: {key, word},
 			success: function(data){
-			 const totalPage = Math.ceil(data/size);
-			 $("#total").html("총 " + data + "명");
-			 $("#pagination").twbsPagination("changeTotalPages", totalPage, page);
-				if(data == 0){
+			 let total = parseInt(data);
+			 const totalPage = Math.ceil(total/size);
+				if(total == 0){
 					alert("해당 검색 내용이 없습니다.");
 					$(frm.word).val("");
 					return;
-				}else if(data <= size){
+				}
+			 $("#total").html("총 " + total + "명");
+			 $("#pagination").twbsPagination("changeTotalPages", totalPage, page);
+				if(total <= size){
 					$("#pagination").hide();
 				}else {					
 					 $("#pagination").show();

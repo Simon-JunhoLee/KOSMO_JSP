@@ -4,6 +4,27 @@
 		width:100px;
 		float: right;
 	}
+	.page-link {
+	  color: #000; 
+	  background-color: #fff;
+	  border: 1px solid #fff;
+	  border-radius : 15%; 
+	}
+	
+	.page-item.active .page-link {
+	 z-index: 1;
+	 color: #4A6BD6;
+	 font-weight:bold;
+	 background-color: #f1f1f1;
+	 border-color: #ccc;
+	 
+	}
+	
+	.page-link:focus, .page-link:hover {
+	  color: #000;
+	  background-color: #fafafa; 
+	  border-color: #ccc;
+	}
 </style>
 <div>
 	<h1>학생관리</h1>
@@ -17,7 +38,7 @@
 					<option value="pname">지도교수</option>
 				</select>
 				<input placeholder="검색어" class="form-control" name="word">
-				<button class="btn btn-primary">검색</button>
+				<button class="btn btn-dark">검색</button>
 				<span id="total" class="mt-2 ms-3"></span>
 			</div>
 		</form>
@@ -34,8 +55,8 @@
 	<div id="pagination" class="pagination justify-content-center mt-5"></div>
 </div>
 <script id="temp_stu" type="x-handlebars-templage">
-	<table class="table table-bordered table-hover">
-		<tr class="text-center">
+	<table class="table table-hover">
+		<tr class="table-dark text-center">
 			<td>학생번호</td>
 			<td>학생이름</td>
 			<td>학생학과</td>
@@ -44,9 +65,9 @@
 			<td>지도교수</td>
 		</tr>
 		{{#each .}}
-		<tr class="text-center">
+		<tr class="text-center stu-row" data-scode="{{scode}}">
 			<td>{{scode}}</td>
-			<td><a href="/stu/read?scode={{scode}}">{{sname}}</a></td>
+			<td>{{sname}}</td>
 			<td>{{sdept}}</td>
 			<td>{{year}}학년</td>
 			<td>{{birthday}}</td>
@@ -60,6 +81,14 @@
 	let size=$("#size").val();
 	let key=$(frm.key).val();
 	let word=$(frm.word).val();
+	
+	$(document).ready(function(){
+	    // 각 행에 클릭 이벤트 추가
+	    $(document).on("click", ".stu-row", function() {
+	        const scode = $(this).data("scode");
+	        window.location.href = "/stu/read?scode=" + scode; // 페이지 이동
+	    });
+	});
 	
 	$(frm).on("submit", function(e){
 		e.preventDefault();

@@ -104,3 +104,22 @@ select count(*) from enrollments;
 select * from enrollments;
 
 select max(pcode)+1 code from professors;
+
+create view view_stu as
+select s.*, pname
+from students s, professors p
+where advisor=pcode;  
+
+select * from view_stu;
+
+create view view_cou as
+select c.*, pname
+from courses c, professors p
+where instructor=pcode;
+
+select * from view_cou;
+
+select concat('N', substring(max(lcode),2)+1) code from courses;
+
+select * from view_cou where lname like '%리%' limit 0, 2;
+SELECT COUNT(*) total FROM view_cou WHERE lname LIKE '%리%';

@@ -7,7 +7,7 @@
 <div class="row my-5 justify-content-center">
 	<div class="col-10 col-md-8">
 		<div class="card">
-			<div class="card-header">
+			<div class="card-header pt-4">
 				<h3 class="text-center">학생등록</h3>
 			</div>
 			<div class="card-body">

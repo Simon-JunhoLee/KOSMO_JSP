@@ -5,7 +5,7 @@ public class CouVO extends ProVO{
 	private String lname;
 	private int hours;
 	private String room;
-	private int instructor;
+	private String instructor;
 	private int capacity;
 	private int persons;
 	
@@ -14,7 +14,7 @@ public class CouVO extends ProVO{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CouVO(String lcode, String lname, int hours, String room, int instructor, int capacity, int persons) {
+	public CouVO(String lcode, String lname, int hours, String room, String instructor, int capacity, int persons) {
 		super();
 		this.lcode = lcode;
 		this.lname = lname;
@@ -53,10 +53,10 @@ public class CouVO extends ProVO{
 	public void setRoom(String room) {
 		this.room = room;
 	}
-	public int getInstructor() {
+	public String getInstructor() {
 		return instructor;
 	}
-	public void setInstructor(int instructor) {
+	public void setInstructor(String instructor) {
 		this.instructor = instructor;
 	}
 	public int getCapacity() {

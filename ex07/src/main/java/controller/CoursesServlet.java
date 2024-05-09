@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.CouDAOImpl;
+import model.CouVO;
 import model.QueryVO;
 
 /**
  * Servlet implementation class CoursesServlet
  */
-@WebServlet(value= {"/cou/list", "/cou/list.json", "/cou/total"})
+@WebServlet(value= {"/cou/list", "/cou/list.json", "/cou/total", "/cou/insert"})
 public class CoursesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CouDAOImpl dao = new CouDAOImpl();
@@ -50,11 +51,34 @@ public class CoursesServlet extends HttpServlet {
 			vo.setWord(request.getParameter("word"));
 			out.print(dao.total(vo));
 			break;
+			
+		case "/cou/insert":
+			request.setAttribute("code", dao.getCode());
+			request.setAttribute("pageName", "/cou/insert.jsp");
+			dis.forward(request, response);
+			break;
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		switch(request.getServletPath()) {
+		case "/cou/insert":
+			CouVO vo = new CouVO();
+			vo.setLcode(request.getParameter("lcode"));
+			vo.setLname(request.getParameter("lname"));
+			vo.setRoom(request.getParameter("room"));
+			vo.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+			vo.setInstructor(request.getParameter("instructor"));
+			vo.setHours(Integer.parseInt(request.getParameter("hours")));
+			vo.setPname(request.getParameter("pname"));
+			// System.out.println(vo.toString());
+			dao.insert(vo);
+			response.sendRedirect("/cou/list");
+			break;
+		}
 	}
 
 }
