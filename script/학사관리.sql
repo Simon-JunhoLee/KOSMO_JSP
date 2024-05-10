@@ -123,3 +123,12 @@ select concat('N', substring(max(lcode),2)+1) code from courses;
 
 select * from view_cou where lname like '%리%' limit 0, 2;
 SELECT COUNT(*) total FROM view_cou WHERE lname LIKE '%리%';
+
+select * from enrollments where scode='95414058';
+
+create view view_enr_cou as
+select e.scode, e.grade, vc.*
+from enrollments e, view_cou vc
+where vc.lcode = e.lcode;
+
+select * from view_enr_cou where scode='92414029';
