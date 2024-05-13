@@ -106,5 +106,20 @@ public class EnrollDAO {
 			return false;
 		}
 	}
+	
+	// 점수 수정
+	public void update(String lcode, String scode, int grade) {
+		try {
+			String sql = "UPDATE enrollments set grade=? WHERE lcode=? and scode=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, grade);
+			pstmt.setString(2, lcode);
+			pstmt.setString(3, scode);
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("점수 수정 : " + e.toString());
+		}
+	}
 
 }

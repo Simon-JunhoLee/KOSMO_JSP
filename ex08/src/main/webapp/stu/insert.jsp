@@ -51,14 +51,14 @@
 						<span class="input-group-text justify-content-center">지도교수</span>
 						<input name="advisor" class="form-control" placeholder="교수번호" readonly>
 						<input name="pname" class="form-control" placeholder="교수이름" readonly>
-						<button class="btn btn-primary" type="button" id="search">검색</button>
+						<button class="btn btn-dark" type="button" id="search">검색</button>
 					</div>
 					<div class="input-group mb-2">
 						<span class="input-group-text justify-content-center">생년월일</span>
 						<input name="birthday" class="form-control" type="date" value="2005-01-01">
 					</div>
 					<div class="text-center mt-3">
-						<button class="btn btn-primary">학생등록</button>
+						<button class="btn btn-dark">학생등록</button>
 						<button class="btn btn-secondary" type="reset">등록취소</button>
 					</div>
 				</form>
