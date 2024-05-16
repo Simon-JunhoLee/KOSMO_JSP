@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="org.apache.catalina.tribes.group.Response"/>
-    <fullyQualifiedTypeName name="model.UserDAO"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
@@ -10,11 +8,9 @@
     <fullyQualifiedTypeName name="java.util.logging.SimpleFormatter"/>
     <fullyQualifiedTypeName name="model.BBSVO"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="model.UserVO"/>
     <fullyQualifiedTypeName name="model.CommentDAO"/>
     <fullyQualifiedTypeName name="model.CommentVO"/>
     <fullyQualifiedTypeName name="model.CommentDAOImpl"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
     <fullyQualifiedTypeName name="model.ProDAO"/>
     <fullyQualifiedTypeName name="model.ProDAOImpl"/>
@@ -26,17 +22,24 @@
     <fullyQualifiedTypeName name="model.EnrollDAO"/>
     <fullyQualifiedTypeName name="model.StuVO"/>
     <fullyQualifiedTypeName name="model.GradeVO"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="model.NaverAPI"/>
-    <fullyQualifiedTypeName name="model.QueryVO"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="model.Database"/>
-    <fullyQualifiedTypeName name="model.GoodsDAO"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="model.UserDAO"/>
+    <fullyQualifiedTypeName name="model.UserVO"/>
+    <fullyQualifiedTypeName name="model.GoodsVO"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="model.GoodsVO"/>
+    <fullyQualifiedTypeName name="model.CartDAO"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="model.CartVO"/>
+    <fullyQualifiedTypeName name="model.GoodsDAO"/>
+    <fullyQualifiedTypeName name="model.QueryVO"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="model.Database"/>
+    <fullyQualifiedTypeName name="model.FavoriteDAO"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 </qualifiedTypeNameHistroy>
