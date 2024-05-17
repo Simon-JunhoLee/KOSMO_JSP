@@ -65,4 +65,21 @@ select *,
 (select count(*) from favorite f where uid = 'jun' and f.gid = g.gid) ucnt, 
 (select count(*) from favorite f where f.gid = g.gid) fcnt
 from goods g
-order by f.regDate desc;
+order by regDate desc;
+
+create table review(
+	rid int auto_increment primary key,
+    gid char(11) not null,
+    uid varchar(30) not null,
+    content text not null,
+    revDate datetime default now(),
+    foreign key(uid) references users(uid),
+    foreign key(gid) references goods(gid)
+);
+
+select * from review;
+
+insert into review(gid, uid, content)
+select gid, uid, content from review;
+
+select count(*) from review;

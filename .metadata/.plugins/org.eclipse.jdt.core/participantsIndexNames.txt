@@ -1,6 +1,8 @@
 INDEX VERSION 1.134
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2732837596.index
 \ex08\src\main\java
+C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2697330234.index
+\ex12\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\470618975.index
 \ex01\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1335314651.index
@@ -39,8 +41,12 @@ C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2245913805.ind
 \ex3\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3403629863.index
 \ex04\src\main\java
+C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\593360243.index
+\ex12\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1962503933.index
 \ex10\src\main\java
+C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3284250300.index
+\ex12\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\884519296.index
 \ex09\src\main\java
 C:\data\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3090030503.index
