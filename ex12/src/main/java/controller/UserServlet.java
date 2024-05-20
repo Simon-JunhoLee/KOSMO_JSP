@@ -50,6 +50,7 @@ public class UserServlet extends HttpServlet {
 			if(vo.getUid()!=null) {
 				if(vo.getUpass().equals(upass)) {
 					session.setAttribute("uid", uid);
+					session.setAttribute("user", vo);
 					result = 1;
 				}else {
 					result = 2;

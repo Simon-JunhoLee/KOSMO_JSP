@@ -1,4 +1,5 @@
 use shopdb;
+/*상품*/
 create table goods(
 	gid char(11) not null primary key,
     title varchar(500) not null,
@@ -12,6 +13,7 @@ desc goods;
 
 select * from goods;
 
+/*사용자*/
 create table users(
 	uid varchar(30) not null primary key,
     upass varchar(30) not null,
@@ -28,6 +30,13 @@ insert into users (uid, upass, uname) values('admin', 'pass', '관리자');
 
 select * from users;
 
+alter table users add column phone varchar(20);
+alter table users add column address1 varchar(500);
+alter table users add column address2 varchar(500);
+
+update users set phone='010-1234-4567', address1='서울 양천구 은행정로4길 20-1', address2='501호' where uid='jun';
+
+/*장바구니*/
 create table cart(
 	uid varchar(30) not null,
     gid char(11) not null,
@@ -44,6 +53,7 @@ where c.gid = g.gid;
 
 select * from view_cart;
 
+/*좋아요*/
 create table favorite(
 	uid varchar(30) not null,
     gid char(11) not null,
@@ -67,6 +77,7 @@ select *,
 from goods g
 order by regDate desc;
 
+/*댓글*/
 create table review(
 	rid int auto_increment primary key,
     gid char(11) not null,
@@ -83,3 +94,44 @@ insert into review(gid, uid, content)
 select gid, uid, content from review;
 
 select count(*) from review;
+
+/*주문자 정보*/
+create table purchase(
+	pid char(13) not null primary key,
+    uid varchar(30) not null,
+    rname varchar(20) not null,
+    rphone varchar(20) not null,
+	raddress1 varchar(500) not null,
+    raddress2 varchar(500) not null,
+    pdate datetime default now(),
+    sum int default 0,
+    status int default 0,	/*0:결제대기, 1:결제확인, 2:배송준비, 3:배송완료, 4:주문완료*/
+    foreign key(uid) references users(uid)
+);
+
+select * from purchase;
+/*delete from purchase where pid > '';*/
+desc purchase;
+
+/*주문상품 정보*/
+create table orders(
+	pid char(13) not null,
+    gid char(11) not null,
+    price int default 0,
+    qnt int default 0,
+    primary key (pid, gid),
+    foreign key(pid) references purchase(pid),
+    foreign key(gid) references goods(gid)
+);
+
+select * from orders;
+desc orders;
+
+select * from orders where pid='0ae459c1-fe47';
+
+create view view_orders as
+select o.*, g.title, g.image
+from orders o, goods g
+where o.gid = g.gid;
+
+select * from view_orders where pid='0ae459c1-fe47';

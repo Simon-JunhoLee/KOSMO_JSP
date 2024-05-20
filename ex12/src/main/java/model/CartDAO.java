@@ -62,7 +62,7 @@ public class CartDAO {
 				vo.setQnt(rs.getInt("qnt"));
 				vo.setImage(rs.getString("image"));
 				vo.setBrand(rs.getString("brand"));
-				System.out.println(vo.toString());
+				// System.out.println(vo.toString());
 				array.add(vo);
 			}
 		} catch (Exception e) {

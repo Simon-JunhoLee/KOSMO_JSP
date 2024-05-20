@@ -53,7 +53,7 @@ public class GoodsDAO {
 				vo.setUcnt(rs.getInt("ucnt"));
 				vo.setFcnt(rs.getInt("fcnt"));
 				vo.setRcnt(rs.getInt("rcnt"));
-				System.out.println(vo.toString());
+				// System.out.println(vo.toString());
 				array.add(vo);
 			}
 		} catch (Exception e) {

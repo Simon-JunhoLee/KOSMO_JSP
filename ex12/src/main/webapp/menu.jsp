@@ -17,11 +17,17 @@
 				<li class="nav-item" id="cart-item">
 		        	<a class="nav-link active" aria-current="page" href="/cart/list">장바구니</a>
 		        </li>
+				<li class="nav-item" id="order-item">
+		        	<a class="nav-link active" aria-current="page" href="/order/list">주문목록</a>
+		        </li>
 				<li class="nav-item" id="search-item">
 		        	<a class="nav-link active" aria-current="page" href="/goods/search">상품검색</a>
 		        </li>
 				<li class="nav-item" id="list-item">
 		        	<a class="nav-link active" aria-current="page" href="/goods/list">상품목록</a>
+		        </li>
+				<li class="nav-item" id="admin_order-item">
+		        	<a class="nav-link active" aria-current="page" href="/admin/order/list">주문관리</a>
 		        </li>
 			</ul>
 			<form class="d-flex" role="search">
@@ -49,13 +55,14 @@
 	// const uid = sessionStorage.getItem("uid");
 	// back-end에 세션값 저장
 	const uid = "${uid}";
-	const uname = '${user.uname}';
+	const uname = "${user.uname}";
 	if(uid){
         $('#login').hide();
         $('#logout').show();
         $('#uid').show();
-        $('#uid a').html(uid + " 님");
-        
+        $('#uid a').html(uname + " 님");
+        $('#cart-item').show();
+        $('#order-item').show();
     }else {
         $('#login').show();
         $('#logout').hide();
@@ -63,15 +70,19 @@
         $('#cart-item').hide();
         $("#search-item").hide();
 		$("#list-item").hide();
+		$('#order-item').hide();
     }
 	
     if(uid == "admin"){
 		$("#search-item").show();
-		$("#list-item").show;
-		$("#cart-item").hide
+		$("#list-item").show();
+		$("#cart-item").hide();
+		$('#order-item').hide();
+		$("#admin_order-item").show();
 	}else{
 		$("#search-item").hide();
 		$("#list-item").hide();
+		$("#admin_order-item").hide();
 	}
 	
 	// 로그아웃 버튼 클릭한 경우
